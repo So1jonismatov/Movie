@@ -7,6 +7,7 @@ import App from "./App";
 import Home from "./pages/Home";
 import Browse from "./pages/Browse";
 import Movie from "./pages/Movie";
+import NotFound from "./pages/404"; // Import the new 404 page
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
       {
         path: "movie/:id",
         element: <Movie />,
+      },
+      // Add the catch-all route here
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

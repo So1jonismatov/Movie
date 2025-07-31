@@ -3,6 +3,7 @@ import { useOmdbApi } from "@/hooks/useOmdbApi";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 const popularSearches = [
   "star wars",
@@ -63,7 +64,7 @@ export default function Browse() {
         </div>
       </div>
 
-      {loading && <p className="text-center">Loading movies...</p>}
+      {loading && <LoadingSpinner />}
       {error && <p className="text-center text-destructive">{error}</p>}
 
       {!loading && !error && movies.length === 0 && (

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useOmdbApi } from "@/hooks/useOmdbApi";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 export default function Movie() {
   const { id } = useParams<{ id: string }>();
@@ -17,11 +18,7 @@ export default function Movie() {
   }, [id, getMovieDetails, clearMovieDetails]);
 
   if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        Loading movie details...
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {
