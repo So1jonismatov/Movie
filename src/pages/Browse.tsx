@@ -16,7 +16,7 @@ const popularSearches = [
   "alien",
   "blade runner",
   "superman",
-];
+]; // API da random yoki hammasini list qilish imkoniyati mavjud emas ekan, improvizatsiya qilganman
 
 export default function Browse() {
   const { movies, loading, error, searchMovies } = useOmdbApi();

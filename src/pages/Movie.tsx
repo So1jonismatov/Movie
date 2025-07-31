@@ -30,7 +30,7 @@ export default function Movie() {
   }
 
   if (!movieDetails) {
-    return null; // Return null or a placeholder while waiting for data
+    return null;
   }
 
   return (

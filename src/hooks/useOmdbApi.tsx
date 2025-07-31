@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const BASE_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 
+// browse page dagi kinolar uchun
 interface Movie {
   Title: string;
   Year: string;
@@ -11,7 +12,7 @@ interface Movie {
   Poster: string;
 }
 
-// Interface for the detailed movie information
+// Movie page dagi kino ma'lumotlari uchun
 interface MovieDetails extends Movie {
   Plot: string;
   Director: string;
@@ -20,11 +21,11 @@ interface MovieDetails extends Movie {
   imdbRating: string;
   Genre: string;
   Runtime: string;
-  Response: string; // OMDb includes a 'Response' field in details as well
+  Response: string;
   Error?: string;
 }
 
-// Interface for the overall search API response
+// Search resultatlari uchun
 interface SearchResult {
   Search: Movie[];
   totalResults: string;
@@ -33,12 +34,13 @@ interface SearchResult {
 }
 
 export const useOmdbApi = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [movies, setMovies] = useState<Movie[]>([]); // browsing yoki searchingdagi kinolar
+  const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null); // bir kino ma'lumotlari
+  const [loading, setLoading] = useState(false); // loading statusi
   const [error, setError] = useState<string | null>(null);
 
   const searchMovies = useCallback(async (query: string, page: number = 1) => {
+    // optimizatsiya uchun useCallback ishlatilgan
     setLoading(true);
     setError(null);
     try {
@@ -71,9 +73,7 @@ export const useOmdbApi = () => {
         setMovieDetails(null);
       }
     } catch (err) {
-      setError(
-        "Failed to fetch movie details. Please check your network connection.",
-      );
+      setError("Failed to fetch movie details.");
       setMovieDetails(null);
     } finally {
       setLoading(false);
